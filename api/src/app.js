@@ -2,7 +2,8 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const routes = require('./routes/index.js');
+const {pokemonRouter} = require('./routes/pokemon.router.js')
+const {typeRouter} = require('./routes/type.router.js');
 
 require('./db.js');
 
@@ -22,14 +23,22 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use('/', routes);
+server.use('/pokemon', pokemonRouter);
+server.use('/type', typeRouter)
 
 // Error catching endware.
-server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
-  const status = err.status || 500;
-  const message = err.message || err;
-  console.error(err);
-  res.status(status).send(message);
-});
+
+server.use('*', () => {
+  res.status(404).json({error: "Not found"});
+})
+
+// server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
+//   const status = err.status || 500;
+//   const message = err.message || err;
+//   console.error(err);
+//   res.status(status).send(message);
+// });
+
 
 module.exports = server;
+

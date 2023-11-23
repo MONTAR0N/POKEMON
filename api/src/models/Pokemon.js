@@ -10,7 +10,8 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
+        unique: true
       },
       name: {
         type: DataTypes.STRING,
@@ -20,7 +21,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false
       },
-      life: {
+      hp: {
         type: DataTypes.INTEGER,
         validate: { min: 1 },
         allowNull: false
@@ -34,6 +35,14 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         validate: { min: 1 },
         allowNull: false
+      },
+      specialAttack: {
+        type: DataTypes.INTEGER,
+        validate: { min: 1 }
+      },
+      specialDefense: {
+        type: DataTypes.INTEGER,
+        validate: { min: 1 }
       },
       speed: {
         type: DataTypes.INTEGER,
