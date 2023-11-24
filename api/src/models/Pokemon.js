@@ -11,11 +11,11 @@ module.exports = (sequelize) => {
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
-        unique: true
       },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
       },
       image: {
         type: DataTypes.STRING,
@@ -45,6 +45,14 @@ module.exports = (sequelize) => {
         validate: { min: 1 }
       },
       speed: {
+        type: DataTypes.INTEGER,
+        validate: { min: 1 }
+      },
+      height: {
+        type: DataTypes.INTEGER,
+        validate: { min: 1 }
+      },
+      weight: {
         type: DataTypes.INTEGER,
         validate: { min: 1 }
       }

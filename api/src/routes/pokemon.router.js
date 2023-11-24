@@ -1,5 +1,6 @@
 const express = require('express');
-const {getPokemons} = require('../controllers/getPokemons')
+const {getPokemons} = require('../controllers/getPokemons');
+const {getPokemonById} = require('../controllers/getPokemonById');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -11,7 +12,8 @@ const pokemonRouter = express.Router();
 
 pokemonRouter.get('/', async (req, res) => {
     try {
-        const pokemons = await getPokemons();
+        const nameQuery = req.query.name;
+        const pokemons = await getPokemons(nameQuery);
         res.status(200).json(pokemons);
         
     } catch (error) {
@@ -19,12 +21,15 @@ pokemonRouter.get('/', async (req, res) => {
     }
 });
 
-pokemonRouter.get('/?name', (req, res) => {
-    res.json("ruta para obtener los pokemones por name")
-});
-
-pokemonRouter.get('/:id', (req, res) => {
-    res.json("ruta para obtener los pokemones por id")
+pokemonRouter.get('/:id', async (req, res) => {
+    try {
+        const pokeId = req.params.id
+        const pokemon = await getPokemonById(pokeId);
+        res.status(200).json(pokemon);
+        
+    } catch (error) {
+        res.status(400).json({error: "Error al obtener datos"});
+    }
 });
 
 
