@@ -6,38 +6,10 @@ const getPokemons = async (nameQuery) => {
         let pokemonDetails;
 
         if (nameQuery) {
-
             const pokeDB = await Pokemon.findAll({ where: { name: nameQuery.toLowerCase() } });
 
             if (pokeDB.length > 0) {
-                const { id, name, stats, sprites, weight, height } = pokeDB[0].dataValues;
-                const selectSprite = sprites.front_default;
-
-                const selectStats = {};
-                stats
-                    .filter(stat => ["defense", "attack", "special-attack", "special-defense", "speed", "hp"].includes(stat.stat.name))
-                    .forEach(stat => {
-                        selectStats[stat.stat.name] = stat.base_stat;
-                    });
-
-                const specialAttack = selectStats["special-attack"];
-                const specialDefense = selectStats["special-defense"];
-
-                const { hp, attack, defense, speed } = selectStats;
-
-                pokemonDetails = {
-                    id,
-                    name,
-                    image: selectSprite,
-                    hp,
-                    attack,
-                    defense,
-                    specialAttack,
-                    specialDefense,
-                    speed,
-                    height,
-                    weight
-                };
+                pokemonDetails = pokeDB[0].dataValues;
             } else {
                 const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${nameQuery.toLowerCase()}`);
                 const { id, name, stats, sprites, weight, height } = data;
@@ -71,7 +43,7 @@ const getPokemons = async (nameQuery) => {
                 };
             }
         } else {
-            const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=20");
+            const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=12");
             const pokemonUrls = data.results.map(pokemon => pokemon.url);
 
             const pokemonPromises = pokemonUrls.map(url => axios.get(url));

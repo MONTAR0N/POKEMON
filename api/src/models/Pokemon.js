@@ -55,6 +55,11 @@ module.exports = (sequelize) => {
       weight: {
         type: DataTypes.INTEGER,
         validate: { min: 1 }
-      }
-    });
+      },
+      
+    },
+    {
+      timestamps: false
+    }
+    );
 };
