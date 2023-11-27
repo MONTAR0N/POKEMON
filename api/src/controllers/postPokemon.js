@@ -1,8 +1,12 @@
 const bodyParser = require('body-parser');
-const { Pokemon } = require('../db');
+const { Pokemon, Type } = require('../db');
 
 const postPokemon = async (body) => {
     try {
+        const existingTypes = await Type.findAll({
+            where: {name: body.types}
+        });
+
         const [newPokemon, created] = await Pokemon.findOrCreate({
             where: { name: body.name, },
             defaults: {
@@ -22,7 +26,9 @@ const postPokemon = async (body) => {
             throw Error('Ese pokemon ya existe');
         }
 
-        return newPokemon;
+        await newPokemon.setTypes(existingTypes);
+
+        return newPokemon
 
     } catch (error) {
         throw error;

@@ -51,8 +51,15 @@ pokemonRouter.post('/', async (req, res) => {
 });
 
 
-pokemonRouter.delete('/:id', (req, res) => {
-    res.json("ruta para eliminar un pokemon")//la dejo pendiente
+pokemonRouter.delete('/:id', async (req, res) => {
+    try {
+
+        const pokemon = await postTypes();
+        res.status(200).json(pokemon);
+
+    } catch (error) {
+        res.status(400).json({ error: "Error al obtener datos" });
+    }
 });
 
 

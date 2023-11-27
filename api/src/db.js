@@ -49,5 +49,6 @@ Type.belongsToMany(Pokemon, {through: "pokemon_type"});
 module.exports = {
    Pokemon,
    Type,
+   
    conn: sequelize, // para importart la conexión { conn } = require('./db.js');
 };
