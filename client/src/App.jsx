@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+//Views
+import Home from "./views/Home/Home";
+import Landing from "./views/Landing/Landing";
+import Form from "./views/Form/Form";
+import Detail from "./views/Detail/Detail";
+//Components
+import NavBar from "./components/NavBar/NavBar";
+//Dependencies
+import { Route, useLocation } from "react-router-dom/cjs/react-router-dom.min";
+// import axios from 'axios';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+// const onSearch = async (id) => {
+//   try {
+//     const {data} = await axios.get(`http://localhost:3001/pokemon/pokemon/${id}`)
+// if(data.name) {
+//   const 
+// }
+//   } catch {
+    
+//   }
+// }
 
+
+
+  const location = useLocation();
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+
+      {location.pathname !== '/' && <NavBar/>}
+
+      <Route exact path = '/' component={Landing} />
+
+      <Route path='/home' component={Home} />
+      
+      <Route path='/detail' component={Detail}/>
+      
+      <Route path='/create' component={Form}/>
+      
+    </div>
+  );
 }
 
-export default App
+export default App;

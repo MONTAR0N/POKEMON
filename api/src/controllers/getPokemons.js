@@ -1,7 +1,7 @@
 const axios = require("axios");
 const { Pokemon } = require('../db');
 
-const getPokemons = async (nameQuery) => {
+const getPokemons = async (nameQuery, page) => {
     try {
         let pokemonDetails;
 
@@ -43,9 +43,19 @@ const getPokemons = async (nameQuery) => {
                 };
             }
         } else {
-            const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=12");
-            const pokemonUrls = data.results.map(pokemon => pokemon.url);
+            let url;
 
+            if (page === "next" || page === "previous") {
+                const { data } = await axios.get(page);
+                url = data.next || data.previous;
+            } else {
+                const limit = 12;
+                const offset = (page - 1) * limit;
+                url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
+            }
+
+            const { data } = await axios.get(url);
+            const pokemonUrls = data.results.map(pokemon => pokemon.url);
             const pokemonPromises = pokemonUrls.map(url => axios.get(url));
             const pokemonResponses = await Promise.all(pokemonPromises);
 
