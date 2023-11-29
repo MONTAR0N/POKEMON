@@ -1,8 +1,8 @@
-
+import styles from "./Card.module.css";
 
 const Card = ({ id, name, image, types }) => {
     return (
-        <div>
+        <div className={styles.card}>
             <p>{id}</p>
             <img src={image} alt={name} />
             <h1>{name}</h1>
