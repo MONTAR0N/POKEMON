@@ -1,10 +1,8 @@
 import { GET_POKEMONS } from "./actions";
 
 const initialState = {
-
+    //Estado global que guarda todos los pokemones renderizados en el home:
     pokemons: [],
-    allPokemons: [],
-    pagePokemons: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -12,9 +10,7 @@ const rootReducer = (state = initialState, action) => {
         case GET_POKEMONS:
             return {
                 ...state,
-                pokemons: [...action.payload].splice(0, 12),
-                allPokemons: action.payload,
-                pagePokemons: action.payload,
+                pokemons: [...action.payload],
             };
 
 

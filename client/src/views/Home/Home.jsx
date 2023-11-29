@@ -10,7 +10,7 @@ const Home = () => {
     useEffect(() => {
         // Agrega un log para verificar el valor de currentPage
         console.log("Current Page:", currentPage);
-   
+
 
         // Llama a la acción getPokemons con el currentPage actual
         dispatch(getPokemons(currentPage));

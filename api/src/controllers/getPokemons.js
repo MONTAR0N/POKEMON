@@ -1,21 +1,39 @@
 const axios = require("axios");
-const { Pokemon } = require('../db');
+const { Pokemon, Type } = require('../db');
 
-const getPokemons = async (nameQuery, page) => {
+const getPokemons = async (nameQuery) => {
     try {
         let pokemonDetails;
-
+        //LO QUE HACEMOS SI HAY QUERY NAME
         if (nameQuery) {
-            const pokeDB = await Pokemon.findAll({ where: { name: nameQuery.toLowerCase() } });
-
-            if (pokeDB.length > 0) {
-                pokemonDetails = pokeDB[0].dataValues;
+            // PRIMERO REVISA BASE DE DATOS CON LA QUERY
+            const dbData = await Pokemon.findOne({ 
+                where: { name: nameQuery.toLowerCase() },
+                include: [
+                    {
+                        model: Type,
+                        attributes: ["name"],
+                        through: {
+                            attributes: [],
+                        },
+                    },
+                ],
+            });
+        
+            // SI HAY ALGO EN LA BASE DE DATOS Y HAY QUERY:
+            if (dbData) {
+                const { id, name, image, hp, attack, defense, specialAttack, specialDefense, speed, height, weight, Types } = dbData;
+                const dbTypes = Types.map(type => type.name);
+                pokemonDetails = [{ id, name, image, hp, attack, defense, specialAttack, specialDefense, speed, height, weight, types: dbTypes }];
             } else {
+                //SI NO HAY NADA EN LA BASE DE DATOS PERO HAY QUERY, BUSCA EN LA API:
                 const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${nameQuery.toLowerCase()}`);
-                const { id, name, stats, sprites, weight, height } = data;
+                const { id, name, stats, sprites, weight, height, types } = data;
 
                 const selectSprite = sprites.front_default;
 
+                const apiTypes = types.map(type => type.type.name);
+                
                 const selectStats = {};
                 stats
                     .filter(stat => ["defense", "attack", "special-attack", "special-defense", "speed", "hp"].includes(stat.stat.name))
@@ -28,7 +46,7 @@ const getPokemons = async (nameQuery, page) => {
 
                 const { hp, attack, defense, speed } = selectStats;
 
-                pokemonDetails = {
+                pokemonDetails = [{
                     id,
                     name,
                     image: selectSprite,
@@ -39,28 +57,19 @@ const getPokemons = async (nameQuery, page) => {
                     specialDefense,
                     speed,
                     height,
-                    weight
-                };
+                    weight,
+                    types: apiTypes
+                }];
             }
         } else {
-            let url;
-
-            if (page === "next" || page === "previous") {
-                const { data } = await axios.get(page);
-                url = data.next || data.previous;
-            } else {
-                const limit = 12;
-                const offset = (page - 1) * limit;
-                url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
-            }
-
-            const { data } = await axios.get(url);
+            const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=46");
             const pokemonUrls = data.results.map(pokemon => pokemon.url);
+
             const pokemonPromises = pokemonUrls.map(url => axios.get(url));
             const pokemonResponses = await Promise.all(pokemonPromises);
 
-            pokemonDetails = pokemonResponses.map(response => {
-                const { id, name, stats, sprites, weight, height } = response.data;
+            const apiDetails = pokemonResponses.map(response => {
+                const { id, name, stats, sprites, weight, height, types } = response.data;
                 const selectSprite = sprites.front_default;
 
                 const selectStats = {};
@@ -70,16 +79,39 @@ const getPokemons = async (nameQuery, page) => {
                         selectStats[stat.stat.name] = stat.base_stat;
                     });
 
+                const apiTypes = types.map(type => type.type.name);
+
                 const specialAttack = selectStats["special-attack"];
                 const specialDefense = selectStats["special-defense"];
 
                 const { hp, attack, defense, speed } = selectStats;
 
-                return { id, name, image: selectSprite, hp, attack, defense, specialAttack, specialDefense, speed, height, weight };
+                return { id, name, image: selectSprite, hp, attack, defense, specialAttack, specialDefense, speed, height, weight, types: apiTypes };
             });
+
+            const dbData = await Pokemon.findAll({
+                include: [
+                    {
+                        model: Type,
+                        attributes: ["name"],
+                        through: {
+                            attributes: [],
+                        },
+                    },
+                ],
+            });
+
+            const dbDetails = dbData.map(pokemon => {
+                const { id, name, image, hp, attack, defense, specialAttack, specialDefense, speed, height, weight, Types } = pokemon;
+                const dbTypes = Types.map(type => type.name);
+                return { id, name, image, hp, attack, defense, specialAttack, specialDefense, speed, height, weight, types: dbTypes };
+            });
+
+            pokemonDetails = [...apiDetails, ...dbDetails];
         }
 
         return pokemonDetails;
+
     } catch (error) {
         console.error(error);
         throw error;
