@@ -7,7 +7,7 @@ const getPokemons = async (nameQuery) => {
         //LO QUE HACEMOS SI HAY QUERY NAME
         if (nameQuery) {
             // PRIMERO REVISA BASE DE DATOS CON LA QUERY
-            const dbData = await Pokemon.findOne({ 
+            const dbData = await Pokemon.findOne({
                 where: { name: nameQuery.toLowerCase() },
                 include: [
                     {
@@ -19,7 +19,7 @@ const getPokemons = async (nameQuery) => {
                     },
                 ],
             });
-        
+
             // SI HAY ALGO EN LA BASE DE DATOS Y HAY QUERY:
             if (dbData) {
                 const { id, name, image, hp, attack, defense, specialAttack, specialDefense, speed, height, weight, Types } = dbData;
@@ -33,7 +33,7 @@ const getPokemons = async (nameQuery) => {
                 const selectSprite = sprites.front_default;
 
                 const apiTypes = types.map(type => type.type.name);
-                
+
                 const selectStats = {};
                 stats
                     .filter(stat => ["defense", "attack", "special-attack", "special-defense", "speed", "hp"].includes(stat.stat.name))
