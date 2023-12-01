@@ -14,16 +14,29 @@ export const getPokemons = () => {
     }
 };
 
-export const getPokemonById = (id) => {
+export const searchPokemon = (queryOrParam) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`http://localhost:3001/pokemon/${id}`);
-            dispatch({ type: GET_POKEMON_BY_ID, payload: data })
+            let response;
+
+            if (!isNaN(queryOrParam) && Number.isInteger(Number(queryOrParam))) {
+                response = await axios.get(`http://localhost:3001/pokemon/${queryOrParam}`);
+            } else {
+                response = await axios.get(`http://localhost:3001/pokemon?name=${queryOrParam}`);
+            }
+
+            if (response.data) {
+                const actionType = !isNaN(queryOrParam) && Number.isInteger(Number(queryOrParam))
+                    ? GET_POKEMON_BY_ID
+                    : GET_POKEMONS;
+
+                dispatch({ type: actionType, payload: response.data });
+            }
         } catch (error) {
             throw error;
         }
-    }
-}
+    };
+};
 
 
 

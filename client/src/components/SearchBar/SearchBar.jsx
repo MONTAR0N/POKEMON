@@ -1,22 +1,14 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { searchPokemon } from "../../redux/actions";
+import { useDispatch } from "react-redux";
 
-const SearchBar = ({ queryOrParam }) => {
+const SearchBar = () => {
     const [qop, setQop] = useState("");
+    const dispatch = useDispatch();
 
-    const searchHandler = async (event) => {
+    const searchHandler = (event) => {
         event.preventDefault();
-        try {
-            if (!isNaN(qop) && Number.isInteger(Number(qop))) {
-                const response = await axios.get(`http://localhost:3001/pokemon?name=${qop}`);
-                console.log("Resultado de búsqueda por nombre:", response.data);
-            } else  {
-                const response = await axios.get(`http://localhost:3001/pokemon/${qop}`);
-                console.log("Resultado de búsqueda por ID:", response.data);
-            }
-        } catch (error) {
-            console.error("Error al realizar la búsqueda:", error);
-        }
+        dispatch(searchPokemon(qop));
     };
 
     return (
