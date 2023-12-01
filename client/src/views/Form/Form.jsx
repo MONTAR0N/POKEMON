@@ -2,6 +2,7 @@ import { useState } from "react";
 import Validate from "./Validate";
 import axios from "axios";
 
+
 const Form = () => {
     const [form, setForm] = useState({
         name: "",
@@ -16,12 +17,31 @@ const Form = () => {
         weight: "",
         types: [],
     });
+    // const property = event.target.name;
+    //         const {value, checked} = event.target;
+    
+    //         if (property === "genres") {
+    //             if (checked) {
+    //                 setForm({
+    //                     ...form,
+    //                     genres: [...form.genres, value]
+    //                 })
+    //             } else {
+    //                 setForm({
+    //                     ...form,
+    //                     genres: [...form.genres.filter(i => i !== value)]
+    //                 })
+    //             }
 
     const [errors, setErrors] = useState({});
 
     const changeHandler = (event) => {
         const property = event.target.name;
-        const value = event.target.value;
+        let value = event.target.value;
+    
+        if (property === 'types') {
+            value = value.split(',');
+        }
         setForm({ ...form, [property]: value });
         Validate({ ...form, [property]: value }, errors, setErrors);
     };
