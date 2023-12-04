@@ -2,9 +2,12 @@ import styles from "./Card.module.css";
 import { Link } from "react-router-dom";
 
 const Card = ({ id, name, image, types }) => {
+
+    const isIntegerId = !isNaN(Number(id)) && Number.isInteger(Number(id));
+
     return (
         <div className={styles.card}>
-            <p>{id}</p>
+            {isIntegerId && <p>{id}</p>}
             <Link to={`/detail/${id}`}>
                 <img src={image} alt={name} className={styles.image} />
             </Link>
