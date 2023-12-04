@@ -7,7 +7,6 @@ const Home = () => {
 
 
     const dispatch = useDispatch();
-    //Este hook se esta encargando de despachar la action para que el estado global se cargue con pokemones
     useEffect(() => {
         dispatch(getPokemons());
     }, [dispatch]);

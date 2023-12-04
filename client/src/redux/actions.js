@@ -2,6 +2,8 @@ import axios from "axios";
 
 export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_POKEMON_BY_ID = "GET_POKEMON_BY_ID";
+export const FILTER_ORIGIN = "FILTER_ORIGIN";
+export const ORDER_POKEMONS = "ORDER_POKEMONS";
 
 export const getPokemons = () => {
     return async (dispatch) => {
@@ -36,6 +38,19 @@ export const searchPokemon = (queryOrParam) => {
         }
     };
 };
+
+export const filterOrigin = (filterType) =>{
+    return{
+        type: FILTER_ORIGIN, payload: filterType
+    }
+}
+
+export const orderDrivers = (orden) =>{
+         return{
+             type: "ORDER_DRIVERS", payload: orden
+         }
+     }
+    
 
 // import axios from "axios";
 

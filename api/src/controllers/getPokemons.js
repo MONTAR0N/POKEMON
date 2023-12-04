@@ -25,6 +25,8 @@ const getPokemons = async (nameQuery) => {
                 const { id, name, image, hp, attack, defense, specialAttack, specialDefense, speed, height, weight, Types } = dbData;
                 const dbTypes = Types.map(type => type.name);
                 pokemonDetails = [{ id, name, image, hp, attack, defense, specialAttack, specialDefense, speed, height, weight, types: dbTypes }];
+                console.log("Tipos de la base de datos:", Types);
+
             } else {
                 //SI NO HAY NADA EN LA BASE DE DATOS PERO HAY QUERY, BUSCA EN LA API:
                 const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${nameQuery.toLowerCase()}`);
