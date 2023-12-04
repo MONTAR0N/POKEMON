@@ -26,7 +26,7 @@ const Detail = () => {
     return (
         <div className={styles.detailContainer}>
             <h1>{pokemon?.name}</h1>
-            <img src={pokemon?.image} alt={pokemon?.name} className="detail-img" />
+            <img src={pokemon?.image} alt={pokemon?.name} className={styles.image} />
             <h2>Hp: {pokemon?.hp}</h2>
             <h2>Attack: {pokemon?.attack}</h2>
             <h2>Defense: {pokemon?.defense}</h2>
