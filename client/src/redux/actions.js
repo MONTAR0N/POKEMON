@@ -39,130 +39,19 @@ export const searchPokemon = (queryOrParam) => {
     };
 };
 
-export const filterOrigin = (filterType) =>{
-    return{
+export const filterOrigin = (filterType) => {
+    return {
         type: FILTER_ORIGIN, payload: filterType
     }
 }
 
-export const orderDrivers = (orden) =>{
-         return{
-             type: "ORDER_DRIVERS", payload: orden
-         }
-     }
-    
-
-// import axios from "axios";
+export const orderPokemons = (orden) => {
+    return {
+        type: ORDER_POKEMONS, payload: orden
+    }
+}
 
 
-//  export const getDrivers =  () => {
-//     return async (dispatch) => {
-//          try {
-//          // const endpoint = http://localhost:3001/drivers${name ? `?name=${name} : ''}`;
-//          const endpoint = http://localhost:3001/drivers;
-//          const {data}= await axios.get(endpoint)
-         
-//          if(data.length === 0){
-//             throw Error('Error server');
-            
-//          }
-//             return dispatch({
-//                type: 'GET_DRIVERS',
-//                payload: data,
-//             });
-         
-//       }
-//       catch (error) {
-//          throw Error(error.message);
-//       }
-      
-//    } 
-// }
-//  export const getDriversByName =  (name) => {
-//     return async (dispatch) => {
-//          try {
-//          const endpoint = http://localhost:3001/drivers?name=${name};
-//          const {data}= await axios.get(endpoint)
-         
-//          if(data.length === 0){
-//             throw Error('Driver no encontrado');
-            
-//          }
-//             return dispatch({
-//                type: 'GET_DRIVERS_BY_NAME',
-//                payload: data,
-//             });
-         
-//       }
-//       catch (error) {
-//          throw Error(error.message);
-//       }
-      
-//    } 
-// }
 
-//  export const getDriverById =  (query) => {
-//    return{
-//       type: "GET_DRIVER_BY_ID", payload: query
-//   } 
-
-// };
-//  export const getTeams =  (name) => {
-//     return async (dispatch) => {
-//          try {
-//          const endpoint = http://localhost:3001/teams${name ? `?name=${name} : ''}`;
-//          const {data}= await axios.get(endpoint)
-//             return dispatch({
-//                type: 'GET_TEAMS',
-//                payload: data,
-//             });
-         
-//       }
-//       catch (error) {
-//          throw Error(error.message);
-//       }
-      
-//    } 
-
-// };
-
-
-// export const filterOrigin = (filterType) =>{
-//     return{
-//         type: "FILTER_ORIGIN", payload: filterType
-//     }
-// }
-
-// export const orderDrivers = (orden) =>{
-//     return{
-//         type: "ORDER_DRIVERS", payload: orden
-//     }
-// }
-// export const filterTeams = (team) =>{
-//     return{
-//         type: "FILTER_TEAMS", payload: team
-//     }
-// }
-
-// export const postDriver = (driver) => {
-//    return async (dispatch) =>{
-//       try {
-//          const posteo = await axios.post('http://localhost:3001/drivers',driver)
-//          return dispatch({
-//             type: "POST_DRIVER",
-//              payload: posteo.data
-//          })
-         
-//       } catch (error) {
-//          throw Error(error.message);
-//       }
-    
-//    };
-//  };
-// export const resetFiltered = () => {
-//    return {
-//      type: "RESET_FILTERED"
-//    };
-//  };
 
 

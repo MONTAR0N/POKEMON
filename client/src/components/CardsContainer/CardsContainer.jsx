@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { filterOrigin } from "../../redux/actions"; 
+import { filterOrigin, orderPokemons } from "../../redux/actions";
 import Card from "../Card/Card";
 import styles from "./CardsContainer.module.css";
 
 const CardsContainer = () => {
     // HOOKS
     const pokemons = useSelector((state) => state.mostrados);
-    const dispatch = useDispatch(); 
+    const dispatch = useDispatch();
 
     const [currentPage, setCurrentPage] = useState(1);
     const [pokemonsToShow, setPokemonsToShow] = useState([]);
-    const [selectedFilter, setSelectedFilter] = useState("ALL"); 
+    const [selectedFilter, setSelectedFilter] = useState("ALL");
+    const [selectedOrder, setSelectedOrder] = useState("NA");
 
     useEffect(() => {
         const startIndex = (currentPage - 1) * 12;
@@ -19,7 +20,7 @@ const CardsContainer = () => {
         setPokemonsToShow(pokemons.slice(startIndex, endIndex));
     }, [currentPage, pokemons]);
 
-    //Functions
+    // Functions
     const handlePreviousClick = () => {
         if (currentPage > 1) {
             setCurrentPage((prevPage) => prevPage - 1);
@@ -39,6 +40,12 @@ const CardsContainer = () => {
         dispatch(filterOrigin(selectedValue));
     };
 
+    const handleOrderChange = (event) => {
+        const selectedOrderValue = event.target.value;
+        setSelectedOrder(selectedOrderValue);
+        dispatch(orderPokemons(selectedOrderValue));
+    };
+
     // Render
     return (
         <div>
@@ -47,11 +54,20 @@ const CardsContainer = () => {
                 <button onClick={handleNextClick}>Next</button>
             </div>
             <div className={styles.botones}>
-
+                <label htmlFor="toShow">To Show: </label>
                 <select value={selectedFilter} onChange={handleFilterChange}>
                     <option value="ALL">All</option>
                     <option value="API">API</option>
                     <option value="DB">DB</option>
+                </select>
+            </div>
+            <div className={styles.botones}>
+                <label htmlFor="orderSelect">Order By:</label>
+                <select id="orderSelect" value={selectedOrder} onChange={handleOrderChange}>
+                    <option value="NA">Name ↑</option>
+                    <option value="ND">Name ↓</option>
+                    <option value="AA">Attack ↑</option>
+                    <option value="AD">Attack ↓</option>
                 </select>
             </div>
             <div className={styles.cardsContainer}>
