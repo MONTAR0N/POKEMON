@@ -56,13 +56,13 @@ const rootReducer = (state = initialState, action) => {
             }
             else if (action.payload === "AA") {
                 copyAllPokemons.sort((a, b) => {
-                    if (a.attack < b.attack) return 1;
+                    if (a.attack > b.attack) return 1;
                     else return -1
                 })
             }
             else if (action.payload === "AD") {
                 copyAllPokemons.sort((a, b) => {
-                    if (a.attack > b.attack) return 1;
+                    if (a.attack < b.attack) return 1;
                     else return -1
                 })
             }
