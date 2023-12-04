@@ -27,9 +27,10 @@ const getPokemonById = async (pokeId) => {
         return pokeDB.dataValues;
         
     } 
-    } catch (error) {
-        throw error;
-    }
+} catch (error) {
+    console.error("Error en getPokemonById:", error.message);
+    throw new Error("Error al obtener información del Pokémon");
+}
     }
 
 module.exports = { getPokemonById };

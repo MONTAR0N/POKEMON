@@ -62,7 +62,8 @@ const getPokemons = async (nameQuery) => {
                 }];
             }
         } else {
-            const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=46");
+            //si no tengo parametro query:
+            const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=60");
             const pokemonUrls = data.results.map(pokemon => pokemon.url);
 
             const pokemonPromises = pokemonUrls.map(url => axios.get(url));
