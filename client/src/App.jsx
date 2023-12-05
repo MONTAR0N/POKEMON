@@ -1,3 +1,4 @@
+import styles from './App.module.css';
 //Views
 import Home from "./views/Home/Home";
 import Landing from "./views/Landing/Landing";
@@ -7,26 +8,15 @@ import Detail from "./views/Detail/Detail";
 import NavBar from "./components/NavBar/NavBar";
 //Dependencies
 import { Route, useLocation } from "react-router-dom/cjs/react-router-dom.min";
-// import axios from 'axios';
 
 const App = () => {
-// const onSearch = async (id) => {
-//   try {
-//     const {data} = await axios.get(`http://localhost:3001/pokemon/pokemon/${id}`)
-// if(data.name) {
-//   const 
-// }
-//   } catch {
-    
-//   }
-// }
 
 
 
   const location = useLocation();
   return (
-    <div className="App">
-
+    <div className={styles.appContainer}>
+    
       {location.pathname !== '/' && <NavBar/>}
 
       <Route exact path = '/' component={Landing} />

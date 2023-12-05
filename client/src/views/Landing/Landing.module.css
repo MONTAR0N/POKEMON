@@ -1,4 +1,33 @@
-.landingContainer{
+.landingContainer {
+    position: relative;
     display: flex;
     justify-content: center;
+}
+
+.backgroundImage {
+    width: 100%; 
+    height: auto;
+}
+
+.centeredContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white; 
+}
+
+.centeredContent h1 {
+    margin-bottom: 20px; 
+}
+
+.centeredContent a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #C155F0; 
+    color: white; 
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5px;
 }
