@@ -4,6 +4,7 @@ export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_POKEMON_BY_ID = "GET_POKEMON_BY_ID";
 export const FILTER_ORIGIN = "FILTER_ORIGIN";
 export const ORDER_POKEMONS = "ORDER_POKEMONS";
+// export const ORDER_TYPES= 'ORDER_TYPES';
 
 export const getPokemons = () => {
     return async (dispatch) => {
@@ -50,6 +51,10 @@ export const orderPokemons = (orden) => {
         type: ORDER_POKEMONS, payload: orden
     }
 }
+
+// export const orderTypes=(order)=>{
+//     return {type: ORDER_TYPES, payload:order}
+// }
 
 
 

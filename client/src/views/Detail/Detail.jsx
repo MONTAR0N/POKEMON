@@ -51,7 +51,6 @@ const Detail = () => {
                         </div>
                     )}
                     </>
-
                 ) : (
                     <h3>Loading...</h3>
                 )

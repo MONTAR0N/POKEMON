@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Validate from "./Validate";
 import axios from "axios";
+import styles from './Form.module.css';
 
 
 const Form = () => {
@@ -17,21 +18,6 @@ const Form = () => {
         weight: "",
         types: [],
     });
-    // const property = event.target.name;
-    //         const {value, checked} = event.target;
-    
-    //         if (property === "genres") {
-    //             if (checked) {
-    //                 setForm({
-    //                     ...form,
-    //                     genres: [...form.genres, value]
-    //                 })
-    //             } else {
-    //                 setForm({
-    //                     ...form,
-    //                     genres: [...form.genres.filter(i => i !== value)]
-    //                 })
-    //             }
 
     const [errors, setErrors] = useState({});
 
@@ -54,7 +40,7 @@ const Form = () => {
     };
 
     return (
-        <form onSubmit={submitHandler}>
+        <form onSubmit={submitHandler} className={styles.formContainer}>
             <div>
                 <label htmlFor="">name: </label>
                 <input type="text" value={form.name} onChange={changeHandler} name="name" />

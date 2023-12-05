@@ -57,10 +57,10 @@ const validate = (formData, newErrors, setErrors) => {
     });
 
     setErrors(newErrorsCopy);
-    return Object.values(newErrorsCopy).every((error) => !error); // Devuelve true si no hay errores
+    return Object.values(newErrorsCopy).every((error) => !error); 
 };
 
-// Funciones isNumeric y isValidUrl se mantienen igual
+
 const isNumeric = (value) => {
     return !isNaN(parseFloat(value)) && isFinite(value);
 };

@@ -71,6 +71,8 @@ const rootReducer = (state = initialState, action) => {
                 mostrados: copyAllPokemons
             }
 
+            
+
         default:
             return { ...state };
     }
