@@ -82,15 +82,15 @@ const CardsContainer = () => {
                 <label htmlFor="typeSelect">Filter By Type:</label>
                 <select
                     className={styles.selectFilter}
-                    name="genres"
-                    placeholder="Gender"
+                    name="types"
+                    placeholder="Type"
                     onChange={handleTypeChange}
-                ><option disabled selected >Choose a genre</option>
-                    {types.map((genre) => (
+                ><option disabled selected >Choose a type</option>
+                    {types.map((type) => (
                         <option
-                            key={genre.id}
-                            value={genre.name}>
-                            {genre.name}
+                            key={type.id}
+                            value={type.name}>
+                            {type.name}
                         </option>
                     ))}
                 </select>
