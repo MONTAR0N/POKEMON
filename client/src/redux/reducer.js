@@ -1,8 +1,9 @@
-import { GET_POKEMONS, GET_POKEMON_BY_ID, FILTER_ORIGIN, ORDER_POKEMONS } from "./actions";
+import { GET_POKEMONS, GET_POKEMON_BY_ID, FILTER_ORIGIN, ORDER_POKEMONS, ORDER_TYPES, ALL_TYPES } from "./actions";
 
 const initialState = {
     pokemons: [],
     mostrados: [],
+    types: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -40,6 +41,14 @@ const rootReducer = (state = initialState, action) => {
                 }
             };
             break;
+
+            case ALL_TYPES:
+                return {
+                    ...state,
+                    types: action.payload
+                }
+
+
         case ORDER_POKEMONS:
             let copyAllPokemons = [...state.mostrados]
             if (action.payload === "NA") {
@@ -70,9 +79,18 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 mostrados: copyAllPokemons
             }
-
             
-
+            
+            
+            case ORDER_TYPES:
+                let filterType = state.pokemons.filter((type)=> {
+                    return type.types.includes(action.payload)
+                })
+                return{
+                    ...state,
+                    mostrados: [...filterType]
+                }
+            
         default:
             return { ...state };
     }

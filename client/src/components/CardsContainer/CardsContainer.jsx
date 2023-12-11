@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { filterOrigin, orderPokemons } from "../../redux/actions";
+import { allTypes, filterOrigin, orderPokemons, orderTypes } from "../../redux/actions";
 import Card from "../Card/Card";
 import styles from "./CardsContainer.module.css";
 
 const CardsContainer = () => {
     // HOOKS
+    const types = useSelector((state) => state.types);
     const pokemons = useSelector((state) => state.mostrados);
     const dispatch = useDispatch();
 
@@ -18,7 +19,8 @@ const CardsContainer = () => {
         const startIndex = (currentPage - 1) * 12;
         const endIndex = startIndex + 12;
         setPokemonsToShow(pokemons.slice(startIndex, endIndex));
-    }, [currentPage, pokemons]);
+        dispatch(allTypes())
+    }, [currentPage, pokemons, dispatch]);
 
     // Functions
     const handlePreviousClick = () => {
@@ -46,6 +48,12 @@ const CardsContainer = () => {
         dispatch(orderPokemons(selectedOrderValue));
     };
 
+    const handleTypeChange = (event) => {
+        dispatch (orderTypes(event.target.value))
+    }
+
+
+
     // Render
     return (
         <div>
@@ -68,6 +76,23 @@ const CardsContainer = () => {
                     <option value="ND">Name ↓</option>
                     <option value="AA">Attack ↑</option>
                     <option value="AD">Attack ↓</option>
+                </select>
+            </div>
+            <div className={styles.botones}>
+                <label htmlFor="typeSelect">Filter By Type:</label>
+                <select
+                    className={styles.selectFilter}
+                    name="genres"
+                    placeholder="Gender"
+                    onChange={handleTypeChange}
+                ><option disabled selected >Choose a genre</option>
+                    {types.map((genre) => (
+                        <option
+                            key={genre.id}
+                            value={genre.name}>
+                            {genre.name}
+                        </option>
+                    ))}
                 </select>
             </div>
             <div className={styles.cardsContainer}>

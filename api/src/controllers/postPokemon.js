@@ -1,4 +1,3 @@
-const bodyParser = require('body-parser');
 const { Pokemon, Type } = require('../db');
 
 const postPokemon = async (body) => {

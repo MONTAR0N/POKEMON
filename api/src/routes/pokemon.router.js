@@ -51,16 +51,16 @@ pokemonRouter.post('/', async (req, res) => {
 });
 
 
-pokemonRouter.delete('/:id', async (req, res) => {
-    try {
+// pokemonRouter.delete('/:id', async (req, res) => {
+//     try {
 
-        const pokemon = await postTypes();
-        res.status(200).json(pokemon);
+//         const pokemon = await postTypes();
+//         res.status(200).json(pokemon);
 
-    } catch (error) {
-        res.status(400).json({ error: "Error al obtener datos" });
-    }
-});
+//     } catch (error) {
+//         res.status(400).json({ error: "Error al obtener datos" });
+//     }
+// });
 
 
 module.exports = { pokemonRouter };

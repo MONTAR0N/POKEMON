@@ -1,0 +1,13 @@
+/* .search{
+    border-radius: 5px;
+    background-color: red;
+} */
+
+.input{
+    border-radius: 10px 0 0 10px;
+}
+
+.submit{
+    border-radius: 0 10px 10px 0;
+    background-color: red;
+}

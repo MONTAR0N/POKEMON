@@ -4,7 +4,8 @@ export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_POKEMON_BY_ID = "GET_POKEMON_BY_ID";
 export const FILTER_ORIGIN = "FILTER_ORIGIN";
 export const ORDER_POKEMONS = "ORDER_POKEMONS";
-// export const ORDER_TYPES= 'ORDER_TYPES';
+export const ORDER_TYPES = 'ORDER_TYPES';
+export const ALL_TYPES = 'ALL_TYPES';
 
 export const getPokemons = () => {
     return async (dispatch) => {
@@ -46,15 +47,32 @@ export const filterOrigin = (filterType) => {
     }
 }
 
-export const orderPokemons = (orden) => {
+export const orderPokemons = (order) => {
     return {
-        type: ORDER_POKEMONS, payload: orden
+        type: ORDER_POKEMONS, payload: order
     }
 }
 
-// export const orderTypes=(order)=>{
-//     return {type: ORDER_TYPES, payload:order}
-// }
+export const allTypes = () => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get("http://localhost:3001/type");
+            dispatch({ type: ALL_TYPES, payload: data });
+        } catch (error) {
+            console.error("Error al obtener datos", error);
+        }
+    };
+};
+
+export const orderTypes = (type) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({type: ORDER_TYPES, payload: type})
+        } catch (error) {
+            console.error("Error al obtener datos", error);
+        }
+    }
+}
 
 
 
