@@ -9,4 +9,31 @@
     justify-content: center;
     margin-top: 10px;
     margin-bottom: 10px;
+    /* border: solid white 1px; */
+    border-radius: 20px;
+}
+
+.botones button{
+    margin: 5px;
+    border: solid #e648c6 2px;
+    border-radius: 20px;
+    padding: 5px;
+    color: #630250;
+    font-weight: bold;
+
+}
+
+.botones button:hover{
+    color: white;
+    background-color: #630250;
+    border: solid white 2px;
+}
+
+.botones select{
+    background-color: rgb(99, 2, 80);
+    border-radius: 20px;
+    border: none;
+    margin: 10px;
+    color: white;
+    padding: 2px;
 }

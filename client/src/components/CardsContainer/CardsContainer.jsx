@@ -68,8 +68,6 @@ const CardsContainer = () => {
                     <option value="API">API</option>
                     <option value="DB">DB</option>
                 </select>
-            </div>
-            <div className={styles.botones}>
                 <label htmlFor="orderSelect">Order By:</label>
                 <select id="orderSelect" value={selectedOrder} onChange={handleOrderChange}>
                     <option value="NA">Name ↑</option>
@@ -77,15 +75,13 @@ const CardsContainer = () => {
                     <option value="AA">Attack ↑</option>
                     <option value="AD">Attack ↓</option>
                 </select>
-            </div>
-            <div className={styles.botones}>
                 <label htmlFor="typeSelect">Filter By Type:</label>
                 <select
                     className={styles.selectFilter}
                     name="types"
                     placeholder="Type"
                     onChange={handleTypeChange}
-                ><option disabled selected >Type</option>
+                ><option disabled selected >type</option>
                     {types.map((type) => (
                         <option
                             key={type.id}
