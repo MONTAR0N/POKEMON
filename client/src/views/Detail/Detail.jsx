@@ -26,17 +26,9 @@ const Detail = () => {
         <div className={styles.detailContainer}>
             {pokemon.name? (
                     <>
-                    <h1>{pokemon?.name}</h1>
+                    <div>
                     <img src={pokemon?.image} alt={pokemon?.name} className={styles.image} />
-                    <h2>Hp: {pokemon?.hp}</h2>
-                    <h2>Attack: {pokemon?.attack}</h2>
-                    <h2>Defense: {pokemon?.defense}</h2>
-                    <h2>Special Attack: {pokemon?.specialAttack}</h2>
-                    <h2>Special Defense: {pokemon?.specialDefense}</h2>
-                    <h2>Speed: {pokemon?.speed}</h2>
-                    <h2>Height: {pokemon?.height}</h2>
-                    <h2>Weight: {pokemon?.weight}</h2>
-        
+                    <h1>{pokemon?.name}</h1>
                     {isNaN(Number(id)) ? (
                         pokemon?.types && (
                             <div>
@@ -50,6 +42,17 @@ const Detail = () => {
                             <h2>{pokemon?.type2}</h2>
                         </div>
                     )}
+                    </div>
+                    <div className={styles.deta}>
+                    <h2>Hp: {pokemon?.hp}</h2>
+                    <h2>Attack: {pokemon?.attack}</h2>
+                    <h2>Defense: {pokemon?.defense}</h2>
+                    <h2>Special Attack: {pokemon?.specialAttack}</h2>
+                    <h2>Special Defense: {pokemon?.specialDefense}</h2>
+                    <h2>Speed: {pokemon?.speed}</h2>
+                    <h2>Height: {pokemon?.height}</h2>
+                    <h2>Weight: {pokemon?.weight}</h2>
+                    </div>
                     </>
                 ) : (
                     <h3>Loading...</h3>

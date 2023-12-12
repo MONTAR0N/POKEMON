@@ -85,7 +85,7 @@ const CardsContainer = () => {
                     name="types"
                     placeholder="Type"
                     onChange={handleTypeChange}
-                ><option disabled selected >Choose a type</option>
+                ><option disabled selected >Type</option>
                     {types.map((type) => (
                         <option
                             key={type.id}
