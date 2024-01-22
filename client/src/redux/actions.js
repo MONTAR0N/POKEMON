@@ -4,8 +4,8 @@ export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_POKEMON_BY_ID = "GET_POKEMON_BY_ID";
 export const FILTER_ORIGIN = "FILTER_ORIGIN";
 export const ORDER_POKEMONS = "ORDER_POKEMONS";
-export const ORDER_TYPES = 'ORDER_TYPES';
 export const ALL_TYPES = 'ALL_TYPES';
+export const ORDER_TYPES = 'ORDER_TYPES';
 
 export const getPokemons = () => {
     return async (dispatch) => {
@@ -59,7 +59,7 @@ export const allTypes = () => {
             const { data } = await axios.get("http://localhost:3001/type");
             dispatch({ type: ALL_TYPES, payload: data });
         } catch (error) {
-            console.error("Error al obtener datos", error);
+            throw error;
         }
     };
 };
@@ -69,7 +69,7 @@ export const orderTypes = (type) => {
         try {
             return dispatch({type: ORDER_TYPES, payload: type})
         } catch (error) {
-            console.error("Error al obtener datos", error);
+            throw error;
         }
     }
 }

@@ -42,11 +42,11 @@ const rootReducer = (state = initialState, action) => {
             };
             break;
 
-            case ALL_TYPES:
-                return {
-                    ...state,
-                    types: action.payload
-                }
+        case ALL_TYPES:
+            return {
+                ...state,
+                types: action.payload
+            }
 
 
         case ORDER_POKEMONS:
@@ -79,18 +79,18 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 mostrados: copyAllPokemons
             }
-            
-            
-            
-            case ORDER_TYPES:
-                let filterType = state.pokemons.filter((type)=> {
-                    return type.types.includes(action.payload)
-                })
-                return{
-                    ...state,
-                    mostrados: [...filterType]
-                }
-            
+
+
+
+        case ORDER_TYPES:
+            let filterType = state.pokemons.filter((type) => {
+                return type.types.includes(action.payload)
+            })
+            return {
+                ...state,
+                mostrados: [...filterType]
+            }
+
         default:
             return { ...state };
     }
