@@ -6,7 +6,7 @@ const Landing = () => {
     return (
         <div className={styles.landingContainer}>
 
-            <img className={styles.backgroundImage} src="https://wallpapercave.com/wp/wp1989447.jpg" alt="" />
+            <img className={styles.backgroundImage} src="https://wallpapers.com/images/hd/ghost-pokemon-1529-x-765-oxqljm57gvltu7p2.jpg" alt="Ghost Pokemon Landscape" />
 
 
             <div className={styles.centeredContent}>

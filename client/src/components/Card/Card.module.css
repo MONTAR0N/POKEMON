@@ -1,22 +1,19 @@
 .card {
     display: flex;
-    /* border: dotted 5px rgb(73, 7, 7); */
     margin: 10px;
     padding: 20px;
     flex-direction: column;
     align-items: center;
     background: linear-gradient(to right, rgba(77, 77, 77, 0.625), rgb(246, 80, 246));
-    /* background: linear-gradient(to right, rgba(115, 115, 115, 0.625) 60%, rgba(233, 34, 34, 0.625) 70%, rgb(233, 34, 34) 100%); */
     border-radius: 10px;
-    
+    transition: box-shadow 0.5s, background-color 0.5s, color 0.5s;
 } 
 
 .card:hover {
     box-shadow: 0 0 0.5rem #fa7233, 0 0 0.5rem #fa7233, 0 0 2rem #fa7233;
-    transition: 0.5s;
     cursor: pointer;
     background-color: rgb(255, 0, 0);
-    color:  rgb(1, 1, 1);
+    color: rgb(1, 1, 1);
 }
 
 .image {
@@ -27,4 +24,9 @@
     height: 150px;
     object-fit: cover;
     background-color: rgb(0, 0, 0);
+    transition: filter 0.5s;
+}
+
+.card:hover .image {
+    filter: hue-rotate(-45deg) brightness(0.8) saturate(1.5);
 }
