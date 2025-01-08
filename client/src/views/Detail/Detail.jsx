@@ -10,15 +10,14 @@ const Detail = () => {
     const [pokemon, setPokemon] = useState({})
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/pokemon/${id}`).then(
-            ({ data }) => {
+        axios.get(`http://localhost:3001/pokemon/${id}`)
+            .then(({ data }) => {
                 if (data.name) {
                     setPokemon(data);
                 } else {
                     window.alert(`No hay pokemon con el id ${id}`);
                 }
-            }
-        );
+            });
         return setPokemon({});
     }, [id]);
 

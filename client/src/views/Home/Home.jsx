@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from "react";
 import CardsContainer from "../../components/CardsContainer/CardsContainer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getPokemons } from "../../redux/actions";
 import styles from './Home.module.css';
 
 const Home = () => {
     const dispatch = useDispatch();
+    const pokemons = useSelector(state => state.pokemons);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                await dispatch(getPokemons());
-                setLoading(false);
-            } catch (error) {
-                console.error("Error ", error);
-                setLoading(false);
-            }
-        };
+        if (pokemons.length === 0) {
+            const fetchData = async () => {
+                try {
+                    await dispatch(getPokemons());
+                    setLoading(false);
+                } catch (error) {
+                    console.error("Error ", error);
+                    setLoading(false);
+                }
+            };
 
-        fetchData();
-    }, [dispatch]);
+            fetchData();
+        } else {
+            setLoading(false);
+        }
+    }, [dispatch, pokemons.length]);
 
     return (
         <div className={styles.homeContainer}>
